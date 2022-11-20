@@ -6,11 +6,11 @@ function CommentList({ postId }) {
 
   const fetchComments = async () => {
     try {
-      let response = await axios.get(
+      const res = await axios.get(
         `http://localhost:4001/posts/${postId}/comments`
       );
 
-      setComments(response.data);
+      setComments(res.data);
     } catch (error) {
       console.error(error);
     }
@@ -18,6 +18,7 @@ function CommentList({ postId }) {
 
   useEffect(() => {
     fetchComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const postComments = Object.values(comments).map((comment) => {
