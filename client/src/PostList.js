@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CommentCreate from './CommentCreate';
+import CommentList from './CommentList';
 
 function PostList() {
   const [posts, setPosts] = useState({});
@@ -24,19 +25,20 @@ function PostList() {
     return (
       <div
         className='card'
-        style={{ width: '33%', marginBottom: '20px' }}
+        style={{ width: '30%', margin: '20px' }}
         key={post.id}
       >
         <div className='card-body'>
           <h3>{post.title}</h3>
           <CommentCreate postId={post.id} />
+          <CommentList postId={post.id} />
         </div>
       </div>
     );
   });
 
   return (
-    <div className='d-flex flex-row flex-wrap justify-content-between'>
+    <div className='d-flex flex-row flex-wrap justify-content-evenly'>
       {renderedPosts}
     </div>
   );

@@ -32,7 +32,7 @@ function CommentCreate({ postId }) {
             placeholder='Add comment...'
           />
         </div>
-        <button className='btn btn-primary'>Submit</button>
+        <button className='btn btn-primary'>Add Comment</button>
       </form>
     </div>
   );
