@@ -25,7 +25,7 @@ function CommentList({ postId }) {
     return (
       <div key={comment.id}>
         <ul className='card-body'>
-          <li>{comment.content}</li>
+          <li key={comment.id}>{comment.content}</li>
         </ul>
       </div>
     );
