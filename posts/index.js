@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const { randomBytes } = require('crypto');
 const cors = require('cors');
 const app = express();
@@ -13,7 +14,7 @@ app.get('/posts', (req, res) => {
   res.json(posts);
 });
 
-app.post('/posts', (req, res) => {
+app.post('/posts', async (req, res) => {
   const id = randomBytes(4).toString('hex');
   if (!req.body.title)
     return res.status(400).json({ error: 'Post body cannot be empty' });
@@ -24,6 +25,12 @@ app.post('/posts', (req, res) => {
     id,
     title,
   };
+
+  // Emit event to event bus
+  await axios.post('http://localhost:4005/events', {
+    type: 'PostCreated',
+    data: { id, title },
+  });
 
   res.status(201).json(posts[id]);
 });
