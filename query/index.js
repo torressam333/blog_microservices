@@ -17,7 +17,7 @@ app.post('/events', (req, res) => {
   const { type, data } = req.body;
 
   if (type === 'PostCreated') {
-    const { id, titile } = data;
+    const { id, title } = data;
 
     // Insert into post store
     posts[id] = { id, title, comments: [] };
@@ -32,6 +32,8 @@ app.post('/events', (req, res) => {
     // Add comment to associated post
     post.comments.push({ id, content });
   }
+
+  console.log(posts);
 
   res.status(201).json({ status: 'Success' });
 });
