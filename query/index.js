@@ -5,10 +5,12 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: ['http://localhost:3000'] }));
 
-app.get('/posts', (req, res) => {});
-
 // In memory store for now
 const posts = {};
+
+app.get('/posts', (_, res) => {
+  return res.status(200).json(posts);
+});
 
 // Receives events from EB
 app.post('/events', (req, res) => {
