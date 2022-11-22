@@ -46,4 +46,11 @@ app.post('/posts/:id/comments', async (req, res) => {
   res.status(201).json(comments);
 });
 
+// Receive events from EB
+app.post('/events', (req, res) => {
+  console.log('Received event', req.body.type);
+
+  res.send({});
+});
+
 app.listen(4001, () => console.log('comments server listening on 4001'));

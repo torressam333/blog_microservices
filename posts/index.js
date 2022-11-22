@@ -35,4 +35,11 @@ app.post('/posts', async (req, res) => {
   res.status(201).json(posts[id]);
 });
 
+// Receive events from EB
+app.post('/events', (req, res) => {
+  console.log('Received event', req.body.type);
+
+  res.send({});
+});
+
 app.listen(4000, () => console.log('posts server listening on 4000'));
