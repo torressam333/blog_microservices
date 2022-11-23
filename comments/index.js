@@ -47,8 +47,34 @@ app.post('/posts/:id/comments', async (req, res) => {
 });
 
 // Receive events from EB
-app.post('/events', (req, res) => {
-  console.log('Received event', req.body.type);
+app.post('/events', async (req, res) => {
+  // Grab event from request
+  const { type, data } = req.body;
+
+  if (type === 'CommentModerated') {
+    // Grab moderated comment from incoming event data
+    const { id, postId, status, content } = data;
+
+    // Get existing version of comment
+    const comments = commentsByPostId[postId];
+
+    // Iterate and find comment
+    const comment = comments.find((comment) => comment.id === id);
+
+    // Update comment status
+    comment.status = status;
+
+    // Tell other services (via event bus) this update occured
+    await axios.post('http://localhost:4005/events', {
+      type: 'CommentUpdated',
+      data: {
+        id,
+        postId,
+        status,
+        content,
+      },
+    });
+  }
 
   res.send({});
 });

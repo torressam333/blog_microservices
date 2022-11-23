@@ -17,7 +17,7 @@ app.post('/events', async (req, res) => {
       ? 'rejected'
       : 'approved';
 
-    // emit comment to EB
+    // emit comment back to EB
     await axios.post('http://localhost:4005/events', {
       type: 'CommentModerated',
       data: {

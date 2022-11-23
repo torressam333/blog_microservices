@@ -12,12 +12,16 @@ app.use(cors({ origin: ['http://localhost:3000'] }));
 app.post('/events', (req, res) => {
   const event = req.body;
 
-  // Send request to all services
+  // Post service
   axios.post('http://localhost:4000/events', event);
+
+  // Comments service
   axios.post('http://localhost:4001/events', event);
+
+  // Query service
   axios.post('http://localhost:4002/events', event);
 
-  // Emit from EB to moderation service
+  // Moderation service
   axios.post('http://localhost:4003/events', event);
 
   res.send({ status: 'OK' });
