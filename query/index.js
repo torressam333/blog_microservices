@@ -33,6 +33,20 @@ app.post('/events', (req, res) => {
     post.comments.push({ id, content, status });
   }
 
+  if (type === 'CommentUpdated') {
+    const { id, content, postId, status } = data;
+
+    // Find post from store
+    const post = posts[postId];
+
+    // Grab the posts comment
+    const comment = post.comments.find((comment) => comment.id === id);
+
+    // Update any potentially changed values in the comment object
+    comment.staus = status;
+    comment.content = content;
+  }
+
   res.status(201).json({ status: 'Success' });
 });
 
