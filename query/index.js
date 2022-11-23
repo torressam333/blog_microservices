@@ -24,16 +24,16 @@ app.post('/events', (req, res) => {
   }
 
   if (type === 'CommentCreated') {
-    const { id, content, postId } = data;
+    const { id, content, postId, status } = data;
 
     // Find post from store
     const post = posts[postId];
 
     // Add comment to associated post
-    post.comments.push({ id, content });
+    post.comments.push({ id, content, status });
   }
 
   res.status(201).json({ status: 'Success' });
 });
 
-app.listen(4002, () => console.log('Listening on port 4002'));
+app.listen(4002, () => console.log('query service listening on port 4002'));

@@ -31,7 +31,7 @@ app.post('/posts/:id/comments', async (req, res) => {
   const comments = commentsByPostId[postId] || [];
 
   // Add new posts comment to array (relational)
-  comments.push({ id: commentId, content });
+  comments.push({ id: commentId, content, status: 'pending' });
 
   // Assign comments array back to given post
   commentsByPostId[postId] = comments;
@@ -39,7 +39,7 @@ app.post('/posts/:id/comments', async (req, res) => {
   // Emit comment creation to event bus
   await axios.post('http://localhost:4005/events', {
     type: 'CommentCreated',
-    data: { id: commentId, content, postId },
+    data: { id: commentId, content, postId, status: 'pending' },
   });
 
   // Return res/comments to user
