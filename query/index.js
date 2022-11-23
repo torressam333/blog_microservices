@@ -29,6 +29,8 @@ app.post('/events', (req, res) => {
     // Find post from store
     const post = posts[postId];
 
+    console.log(post.comments);
+
     // Add comment to associated post
     post.comments.push({ id, content, status });
   }
@@ -43,7 +45,7 @@ app.post('/events', (req, res) => {
     const comment = post.comments.find((comment) => comment.id === id);
 
     // Update any potentially changed values in the comment object
-    comment.staus = status;
+    comment.status = status;
     comment.content = content;
   }
 

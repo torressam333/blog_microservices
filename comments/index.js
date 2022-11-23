@@ -55,11 +55,13 @@ app.post('/events', async (req, res) => {
     // Grab moderated comment from incoming event data
     const { id, postId, status, content } = data;
 
-    // Get existing version of comment
+    // Get all comments belonging to current post
     const comments = commentsByPostId[postId];
 
-    // Iterate and find comment
+    // Iterate and find specific comment
     const comment = comments.find((comment) => comment.id === id);
+
+    console.log(comment.status);
 
     // Update comment status
     comment.status = status;
