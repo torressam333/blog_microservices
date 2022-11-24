@@ -8,13 +8,7 @@ app.use(cors({ origin: ['http://localhost:3000'] }));
 // In memory store for now
 const posts = {};
 
-app.get('/posts', (_, res) => {
-  return res.status(200).json(posts);
-});
-
-// Receives events from EB
-app.post('/events', (req, res) => {
-  const { type, data } = req.body;
+const handleEvent = (type, data) => {
 
   if (type === 'PostCreated') {
     const { id, title } = data;
@@ -50,6 +44,17 @@ app.post('/events', (req, res) => {
     comment.status = status;
     comment.content = content;
   }
+}
+
+app.get('/posts', (_, res) => {
+  return res.status(200).json(posts);
+});
+
+// Receives events from EB
+app.post('/events', (req, res) => {
+  const { type, data } = req.body;
+  
+  handleEvent(type, data)
 
   res.status(201).json({ status: 'Success' });
 });
