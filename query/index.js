@@ -19,6 +19,8 @@ app.post('/events', (req, res) => {
   if (type === 'PostCreated') {
     const { id, title } = data;
 
+    console.log('heree')
+
     // Insert into post store
     posts[id] = { id, title, comments: [] };
   }
