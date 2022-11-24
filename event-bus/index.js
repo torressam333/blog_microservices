@@ -9,8 +9,13 @@ app.use(express.json());
 // Cors whitelist
 app.use(cors({ origin: ['http://localhost:3000'] }));
 
+const events = [];
+
 app.post('/events', (req, res) => {
   const event = req.body;
+
+  // Add all incoming events in temp DS
+  events.push(event);
 
   // Post service
   axios.post('http://localhost:4000/events', event).catch(err => console.error(err));
@@ -26,5 +31,8 @@ app.post('/events', (req, res) => {
 
   res.send({ status: 'OK' });
 });
+
+// Endpoint for synchronizing events
+app.get('/events', (_, res) => res.send(events));
 
 app.listen(4005, () => console.log('Listening on port 4005'));
