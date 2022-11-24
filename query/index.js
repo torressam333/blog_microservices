@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const axios = require('axios');
 const app = express();
 
 app.use(express.json());
@@ -53,10 +54,27 @@ app.get('/posts', (_, res) => {
 // Receives events from EB
 app.post('/events', (req, res) => {
   const { type, data } = req.body;
-  
+
   handleEvent(type, data)
 
   res.status(201).json({ status: 'Success' });
 });
 
-app.listen(4002, () => console.log('query service listening on port 4002'));
+app.listen(4002, async () => {
+  console.log('query service listening on port 4002');
+
+  try {
+    // Make request to EB and get list of all emitted events up to this point in time
+    const res = await axios.get('http://localhost:4005/events');
+
+    for (let event of res.data) {
+      const {type, data} = event;
+      console.log('Processing event:', event.type);
+
+      //Handle event
+      handleEvent(type, data);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
