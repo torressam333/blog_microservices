@@ -18,15 +18,17 @@ app.post('/events', async (req, res) => {
       : 'approved';
 
     // emit comment back to EB
-    await axios.post('http://localhost:4005/events', {
-      type: 'CommentModerated',
-      data: {
-        id,
-        postId,
-        status,
-        content,
-      },
-    }).catch(err => console.error(err));
+    await axios
+      .post('http://localhost:4005/events', {
+        type: 'CommentModerated',
+        data: {
+          id,
+          postId,
+          status,
+          content,
+        },
+      })
+      .catch((err) => console.error(err));
   }
 
   // Return response
