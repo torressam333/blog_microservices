@@ -1,6 +1,8 @@
 # Built with Node and React
 
-This is an example of a blog microservice.
-The UI is not the prettiest but the point of this is to demonstrate
-an async way of having different features work independently as a larger
-microservice with little to no direct dependencies on each other.
+This repo contains a blog project built out in a micro services architechture pattern.
+It uses React as the frontend library. On the backend it uses Node.js, Express, Docker, and Kubernates.
+
+It followes and event driven architechture where each individual service works together but is not dependent on each other.
+
+The application flow is broken up into logical "services" and each micro service is responsible for it's own functionality without having to rely on the performance of the other related servives.
