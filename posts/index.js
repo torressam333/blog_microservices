@@ -27,10 +27,12 @@ app.post('/posts', async (req, res) => {
   };
 
   // Emit event to event bus
-  await axios.post('http://localhost:4005/events', {
-    type: 'PostCreated',
-    data: { id, title },
-  }).catch(err => console.error(err));
+  await axios
+    .post('http://localhost:4005/events', {
+      type: 'PostCreated',
+      data: { id, title },
+    })
+    .catch((err) => console.error(err));
 
   res.status(201).json(posts[id]);
 });
@@ -42,4 +44,4 @@ app.post('/events', (req, res) => {
   res.send({});
 });
 
-app.listen(4000, () => console.log('posts server listening on 4000'));
+app.listen(4000, () => console.log('Posts service is listening on 4000'));
