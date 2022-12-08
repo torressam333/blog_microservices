@@ -1,0 +1,15 @@
+# Posts Kubernates Service file
+apiVersion: v1
+kind: Service
+metadata:
+  # Service name
+  name: posts-srv
+spec:
+  type: NodePort
+  selector:
+    app: posts
+  ports:
+    - name: posts
+      prototcol: TCP
+      port: 4000
+      targetPort: 4000
