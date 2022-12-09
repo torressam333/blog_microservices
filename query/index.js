@@ -10,11 +10,10 @@ app.use(cors({ origin: ['http://localhost:3000'] }));
 const posts = {};
 
 const handleEvent = (type, data) => {
-
   if (type === 'PostCreated') {
     const { id, title } = data;
 
-    console.log('heree')
+    console.log('heree');
 
     // Insert into post store
     posts[id] = { id, title, comments: [] };
@@ -45,7 +44,7 @@ const handleEvent = (type, data) => {
     comment.status = status;
     comment.content = content;
   }
-}
+};
 
 app.get('/posts', (_, res) => {
   return res.status(200).json(posts);
@@ -55,7 +54,7 @@ app.get('/posts', (_, res) => {
 app.post('/events', (req, res) => {
   const { type, data } = req.body;
 
-  handleEvent(type, data)
+  handleEvent(type, data);
 
   res.status(201).json({ status: 'Success' });
 });
@@ -65,10 +64,10 @@ app.listen(4002, async () => {
 
   try {
     // Make request to EB and get list of all emitted events up to this point in time
-    const res = await axios.get('http://localhost:4005/events');
+    const res = await axios.get('http://event-bus-srv:4005/events');
 
     for (let event of res.data) {
-      const {type, data} = event;
+      const { type, data } = event;
       console.log('Processing event:', event.type);
 
       //Handle event
