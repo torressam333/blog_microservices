@@ -24,17 +24,17 @@ app.post('/events', (req, res) => {
 
   // Comments service
   axios
-    .post('http://localhost:4001/events', event)
+    .post('http://comments-clusterip-srv:4001/events', event)
     .catch((err) => console.error(err));
 
   // Query service
   axios
-    .post('http://localhost:4002/events', event)
+    .post('http://query-clusterip-srv:4002/events', event)
     .catch((err) => console.error(err));
 
   // Moderation service
   axios
-    .post('http://localhost:4003/events', event)
+    .post('http://moderation-clusterip-srv:4003/events', event)
     .catch((err) => console.error(err));
 
   res.send({ status: 'OK' });

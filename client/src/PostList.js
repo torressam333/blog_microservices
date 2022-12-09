@@ -9,7 +9,7 @@ function PostList() {
   const fetchPosts = async () => {
     try {
       // Make GET to query service instead of the posts service directly
-      const res = await axios.get('http://localhost:4002/posts');
+      const res = await axios.get('http://query-clusterip-srv:4002/posts');
 
       console.log(res.data);
 

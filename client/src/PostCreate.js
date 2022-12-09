@@ -12,7 +12,7 @@ function PostCreate() {
 
     try {
       // Make request to post microservice
-      await axios.post('http://localhost:4000/posts', {
+      await axios.post('http://posts-clusterip-srv:4000/posts', {
         title, // Expected body from backend
       });
 
