@@ -18,3 +18,18 @@ spec:
           image: torressam/posts:latest
           ports:
             - containerPort: 80
+---
+# Cluster up Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-clusterip-srv
+spec:
+  selector:
+    app: posts
+  type: ClusterIP
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
