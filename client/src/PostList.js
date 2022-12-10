@@ -9,7 +9,7 @@ function PostList() {
   const fetchPosts = async () => {
     try {
       // Make GET to query service instead of the posts service directly
-      const res = await axios.get('http://post.com/posts');
+      const res = await axios.get('http://posts.com/posts');
 
       console.log(res.data);
 

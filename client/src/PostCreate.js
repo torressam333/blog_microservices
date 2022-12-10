@@ -12,7 +12,7 @@ function PostCreate() {
 
     try {
       // Make request to post microservice
-      await axios.post('http://post.com/posts/create', {
+      await axios.post('http://posts.com/posts/create', {
         title, // Expected body from backend
       });
 

@@ -1,5 +1,5 @@
 # Base image
-FROM node:alpine
+FROM node:16-alpine
 
 # Needed to allow react app to run in Docker container
 ENV CI=true

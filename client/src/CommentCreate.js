@@ -8,7 +8,7 @@ function CommentCreate({ postId }) {
     e.preventDefault();
 
     try {
-      await axios.post(`http://post.com/posts/${postId}/comments`, {
+      await axios.post(`http://posts.com/posts/${postId}/comments`, {
         content,
       });
 
