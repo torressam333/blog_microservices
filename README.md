@@ -1,4 +1,4 @@
-# Built with Node and React
+# Microservices project built and deployed with: Node, React. Docker and Kubernetes
 
 This repo contains a blog project built out in a micro services architecture pattern.
 It uses React as the frontend library. On the backend it uses Node.js, Express, Docker, and Kubernates.
