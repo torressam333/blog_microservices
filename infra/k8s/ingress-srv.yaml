@@ -9,10 +9,38 @@ spec:
     - host: posts.com
       http:
         paths:
-          - path: /posts
+          - path: /posts/create
             pathType: Prefix
             backend:
               service:
                 name: posts-clusterip-srv
                 port:
                   number: 4000
+          - path: /posts/:id/comments
+            pathType: Prefix
+            backend:
+              service:
+                name: comments-clusterip-srv
+                port:
+                  number: 4001
+          - path: /posts
+            pathType: Prefix
+            backend:
+              service:
+                name: query-clusterip-srv
+                port:
+                  number: 4002
+          - path: /posts
+            pathType: Prefix
+            backend:
+              service:
+                name: moderation-clusterip-srv
+                port:
+                  number: 4003
+          - path: /posts
+            pathType: Prefix
+            backend:
+              service:
+                name: event-bus-srv
+                port:
+                  number: 4005
