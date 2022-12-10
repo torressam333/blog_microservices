@@ -4,6 +4,7 @@ metadata:
   name: ingress-srv
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
     - host: posts.com
@@ -16,7 +17,7 @@ spec:
                 name: posts-clusterip-srv
                 port:
                   number: 4000
-          - path: /posts/:id/comments
+          - path: /posts/?(.*)/comments
             pathType: Prefix
             backend:
               service:
@@ -30,17 +31,10 @@ spec:
                 name: query-clusterip-srv
                 port:
                   number: 4002
-          - path: /posts
+          - path: /?(.*) #Match any path in the react app (react router capability)
             pathType: Prefix
             backend:
               service:
-                name: moderation-clusterip-srv
+                name: client-clusterip-srv
                 port:
-                  number: 4003
-          - path: /posts
-            pathType: Prefix
-            backend:
-              service:
-                name: event-bus-srv
-                port:
-                  number: 4005
+                  number: 3000
