@@ -8,12 +8,9 @@ function CommentCreate({ postId }) {
     e.preventDefault();
 
     try {
-      await axios.post(
-        `http://comments-clusterip-srv:4001/posts/${postId}/comments`,
-        {
-          content,
-        }
-      );
+      await axios.post(`http://post.com/posts/${postId}/comments`, {
+        content,
+      });
 
       // Clear input
       setContent('');
