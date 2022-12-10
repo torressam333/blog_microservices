@@ -1,6 +1,10 @@
 # Base image
 FROM node:alpine
 
+# Needed to allow react app to run in Docker container
+ENV CI=true
+ENV WDS_SOCKET_PORT=0
+
 # Output dir in container
 WORKDIR /app
 
